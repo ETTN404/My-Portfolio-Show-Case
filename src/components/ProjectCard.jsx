@@ -1,101 +1,85 @@
-import React from "react";
-import { Smartphone, Laptop, ArrowUpRight, Github } from "lucide-react";
+import React, { useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 export default function ProjectCard({ project, onSelect }) {
-  const isMobile = project.type === "mobile";
-  
-  // Custom styling according to the project's accent color
-  const colorSchemes = {
-    emerald: {
-      borderHover: "hover:border-emerald-500/40",
-      glow: "group-hover:shadow-[0_0_20px_-3px_rgba(16,185,129,0.15)]",
-      badge: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-      btnBg: "bg-emerald-500 text-slate-950 hover:bg-emerald-400 hover:shadow-emerald-500/20",
-      iconColor: "text-emerald-400"
-    },
-    cyan: {
-      borderHover: "hover:border-cyan-500/40",
-      glow: "group-hover:shadow-[0_0_20px_-3px_rgba(6,182,212,0.15)]",
-      badge: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
-      btnBg: "bg-cyan-500 text-slate-950 hover:bg-cyan-400 hover:shadow-cyan-500/20",
-      iconColor: "text-cyan-400"
-    },
-    violet: {
-      borderHover: "hover:border-violet-500/40",
-      glow: "group-hover:shadow-[0_0_20px_-3px_rgba(139,92,246,0.15)]",
-      badge: "bg-violet-500/10 text-violet-400 border-violet-500/20",
-      btnBg: "bg-violet-500 text-white hover:bg-violet-400 hover:shadow-violet-500/20",
-      iconColor: "text-violet-400"
-    }
+  const cardRef = useRef(null);
+  const [tiltStyle, setTiltStyle] = useState({});
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    
+    const x = e.clientX - rect.left; 
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = ((y - centerY) / centerY) * -5;
+    const rotateY = ((x - centerX) / centerX) * 5;
+    
+    setTiltStyle({
+      transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+      transition: 'transform 0.1s ease-out'
+    });
   };
 
-  const scheme = colorSchemes[project.accentColor] || colorSchemes.emerald;
+  const handleMouseLeave = () => {
+    setTiltStyle({
+      transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg)',
+      transition: 'transform 0.5s ease-out'
+    });
+  };
 
   return (
     <div 
-      className={`group relative rounded-2xl glass-panel p-6 border border-slate-800/80 transition-all duration-300 flex flex-col justify-between ${scheme.borderHover} ${scheme.glow} cursor-pointer hover:-translate-y-1.5`}
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={tiltStyle}
+      className={`group relative rounded-2xl glass-panel glass-panel-hover p-6 border border-spine-border/50 transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-lg z-10 overflow-hidden`}
       onClick={onSelect}
     >
-      {/* Sparkles / Background Accents */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent rounded-2xl pointer-events-none" />
-      
-      <div>
-        {/* Card Header (Device badge & category) */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <span className={`p-2 rounded-lg bg-slate-900 border border-slate-800 ${scheme.iconColor}`}>
-              {isMobile ? <Smartphone className="w-4 h-4" /> : <Laptop className="w-4 h-4" />}
-            </span>
-            <span className={`text-[10px] font-mono font-semibold uppercase tracking-widest px-2.5 py-0.5 rounded-full border ${scheme.badge}`}>
-              {project.category}
-            </span>
+      <div className="relative z-30 flex flex-col h-full justify-between">
+        <div>
+          {/* Card Header (Title) */}
+          <h3 className="text-xl font-bold text-white group-hover:text-spine-accent transition-colors duration-300 mb-2">
+            {project.title}
+          </h3>
+          
+          <p className="text-spine-textMuted text-sm leading-relaxed font-normal">
+            {project.tagline}
+          </p>
+
+          {/* Minimal Tech Stack */}
+          <div className="flex flex-wrap gap-2 mt-6">
+            {project.stack.slice(0, 3).map((tech, idx) => (
+              <span 
+                key={idx} 
+                className="text-xs font-medium bg-spine-bg/80 border border-spine-border text-spine-textMuted px-2.5 py-1 rounded-full"
+              >
+                {tech}
+              </span>
+            ))}
           </div>
-          <span className="text-xs text-slate-600 font-mono group-hover:text-slate-400 transition-colors">
-            {isMobile ? "Smartphone View" : "Desktop View"}
+        </div>
+
+        {/* Card Action footer */}
+        <div className="flex items-center justify-between mt-8 pt-4 border-t border-spine-border/40">
+          <span className="text-spine-textMuted text-xs font-medium group-hover:text-spine-textMain transition-colors">
+            Demo Available
           </span>
+          <button 
+            className="flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-lg transition-all duration-300 shadow-lg btn-spine-dark group-hover:bg-spine-accent group-hover:text-spine-bg group-hover:border-transparent"
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelect();
+            }}
+          >
+            Launch Demo
+            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </button>
         </div>
-
-        {/* Title & Tagline */}
-        <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors duration-300">
-          {project.title}
-        </h3>
-        <p className="text-slate-400 text-sm mt-2 leading-relaxed font-light">
-          {project.tagline}
-        </p>
-
-        {/* Tech Stack Highlights (limited for card visual) */}
-        <div className="flex flex-wrap gap-1.5 mt-5">
-          {project.stack.slice(0, 3).map((tech, idx) => (
-            <span 
-              key={idx} 
-              className="text-xs font-mono bg-[#090d16] border border-slate-800 text-slate-400 px-2 py-0.5 rounded-md"
-            >
-              {tech}
-            </span>
-          ))}
-          {project.stack.length > 3 && (
-            <span className="text-xs font-mono bg-slate-900 text-slate-500 px-2 py-0.5 rounded-md border border-slate-800/50">
-              +{project.stack.length - 3} more
-            </span>
-          )}
-        </div>
-      </div>
-
-      {/* Card Action footer */}
-      <div className="flex items-center justify-between mt-8 pt-4 border-t border-slate-900">
-        <span className="text-slate-500 text-xs font-mono group-hover:text-slate-300 transition-colors">
-          Demo: Ready
-        </span>
-        <button 
-          className={`flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl transition-all duration-300 shadow-lg ${scheme.btnBg}`}
-          onClick={(e) => {
-            e.stopPropagation(); // Prevent card select double triggering
-            onSelect();
-          }}
-        >
-          Launch Workspace
-          <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </button>
       </div>
     </div>
   );
