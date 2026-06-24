@@ -4,12 +4,18 @@ import Hero from "./components/Hero";
 import ProjectCard from "./components/ProjectCard";
 import InteractiveWorkspace from "./components/InteractiveWorkspace";
 import CustomDemoInjector from "./components/CustomDemoInjector";
+import WaveBackground from "./components/WaveBackground";
 import { Github, Linkedin, Mail, Layers, Cpu, Code2 } from "lucide-react";
 
 export default function App() {
   const [projects, setProjects] = useState(initialProjects);
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeFilter, setActiveFilter] = useState("all");
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    setMousePos({ x: e.clientX, y: e.clientY });
+  };
 
   // Filters projects based on selected badge
   const filteredProjects = projects.filter((project) => {
@@ -36,9 +42,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen text-slate-100 bg-[#030712] relative overflow-x-hidden flex flex-col justify-between">
-      {/* Background decoration - Ambient glows */}
-      <div className="absolute inset-0 dots-bg opacity-15 pointer-events-none" />
+    <div className="min-h-screen text-spine-textMain bg-spine-bg relative overflow-x-hidden flex flex-col justify-between font-sans">
+      {/* Interactive HTML5 Canvas Flowing Waves */}
+      <WaveBackground />
 
       {/* RENDER ACTIVE INTERACTIVE COCKPIT WORKSPACE */}
       {selectedProject ? (
@@ -50,53 +56,34 @@ export default function App() {
         /* RENDER LANDING DASHBOARD */
         <>
           <div>
-            {/* Nav Header */}
-            <nav className="border-b border-slate-900 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            {/* SpineEdge Nav Header */}
+            <nav className="border-b border-spine-border/30 bg-spine-bg/50 backdrop-blur-md sticky top-0 z-50">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
                 
                 {/* Brand / Logo */}
-                <div className="flex items-center gap-2.5 cursor-pointer">
-                  <div className="p-2 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 shadow-lg shadow-emerald-500/10">
-                    <Code2 className="w-5 h-5 text-slate-950 stroke-[2.5]" />
+                <div className="flex items-center gap-2 cursor-pointer">
+                  <div className="w-8 h-8 rounded-lg bg-spine-accent flex items-center justify-center shadow-lg shadow-spine-accent/20">
+                    <span className="text-spine-bg font-extrabold text-lg leading-none">S</span>
                   </div>
-                  <span className="font-mono text-base font-extrabold text-white tracking-wider flex items-center gap-1.5 select-none">
-                    DEV<span className="text-emerald-400">WORKSPACE</span>
+                  <span className="font-sans text-xl font-bold text-white tracking-tight flex items-center gap-1 select-none">
+                    SpineEdge
                   </span>
                 </div>
 
-                {/* Right contacts / actions */}
-                <div className="flex items-center gap-4">
-                  <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-400 text-xs font-mono select-none">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping inline-block" />
-                    SYSTEM STABILITY: ONLINE
-                  </div>
-                  <div className="flex items-center gap-2 border-l border-slate-800 pl-4">
-                    <a 
-                      href="https://github.com" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-all"
-                      title="GitHub Profile"
-                    >
-                      <Github className="w-4 h-4" />
-                    </a>
-                    <a 
-                      href="https://linkedin.com" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-all"
-                      title="LinkedIn Profile"
-                    >
-                      <Linkedin className="w-4 h-4" />
-                    </a>
-                    <a 
-                      href="mailto:contact@developer.com" 
-                      className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-all"
-                      title="Email Contact"
-                    >
-                      <Mail className="w-4 h-4" />
-                    </a>
-                  </div>
+                {/* Center Links */}
+                <div className="hidden md:flex items-center gap-8 text-sm font-medium text-spine-textMuted">
+                  <a href="#" className="text-white flex items-center gap-1">Home <span className="text-[8px]">▼</span></a>
+                  <a href="#" className="hover:text-white transition-colors">Company</a>
+                  <a href="#" className="hover:text-white transition-colors">Pricing</a>
+                  <a href="#" className="hover:text-white transition-colors">Blog</a>
+                  <a href="#" className="hover:text-white transition-colors">Jobs</a>
+                </div>
+
+                {/* Right Action */}
+                <div className="flex items-center">
+                  <button className="px-5 py-2.5 rounded-lg border border-spine-border hover:bg-spine-panel hover:text-white text-spine-textMuted text-sm font-medium transition-colors">
+                    Get Started
+                  </button>
                 </div>
               </div>
             </nav>
