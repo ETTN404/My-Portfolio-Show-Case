@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { 
   Wifi, 
   Battery, 
@@ -25,6 +25,8 @@ export default function DeviceSimulator({
 }) {
   const [copied, setCopied] = useState(false);
   const [currentTime, setCurrentTime] = useState("09:41");
+  const [scale, setScale] = useState(1);
+  const containerRef = useRef(null);
 
   // Keep a digital clock updated for the mobile mockup
   useEffect(() => {
@@ -55,27 +57,60 @@ export default function DeviceSimulator({
   };
 
   const isMobile = deviceType === "mobile";
+  const isMobileAppCategory = project.type === "mobile";
+
+  useEffect(() => {
+    if (!isMobileAppCategory || !isMobile || !containerRef.current) return;
+    
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const { width, height } = entry.contentRect;
+        // Calculate scale to fit 393x852 inside the available container
+        const scaleW = (width - 32) / 393;
+        const scaleH = (height - 32) / 852;
+        setScale(Math.min(scaleW, scaleH, 1));
+      }
+    });
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [isMobileAppCategory, isMobile]);
 
   return (
     <div className="flex flex-col items-center justify-center p-2 sm:p-4 w-full h-full min-h-[500px] lg:min-h-[660px]">
       {isMobile ? (
         /* ================= SMARTPHONE SIMULATOR ================= */
-        <div className="relative">
+        <div ref={containerRef} className="relative w-full h-full flex items-center justify-center overflow-hidden">
           {/* Phone Hardware Mockup Buttons */}
           <div className="phone-btn-volume up" />
           <div className="phone-btn-volume down" />
           <div className="phone-btn-power" />
 
           {/* Smartphone Container */}
-          <div className="phone-mockup w-[310px] h-[630px] flex flex-col relative select-none bg-slate-950 transition-all duration-500">
+          <div 
+            className="phone-mockup flex flex-col relative select-none bg-slate-950 transition-all duration-500"
+            style={isMobileAppCategory ? {
+              width: '393px',
+              height: '852px',
+              transform: `scale(${scale})`,
+              transformOrigin: 'center center'
+            } : {
+              width: '310px',
+              height: '630px'
+            }}
+          >
             {/* Camera / Notch */}
-            <div className="phone-notch">
-              <div className="phone-speaker" />
-              <div className="phone-camera" />
-            </div>
+            {isMobileAppCategory ? (
+              <div className="dynamic-island" />
+            ) : (
+              <div className="phone-notch">
+                <div className="phone-speaker" />
+                <div className="phone-camera" />
+              </div>
+            )}
 
             {/* Virtual Status Bar */}
-            <div className="flex items-center justify-between px-6 pt-3 pb-2 text-white font-mono text-[11px] font-medium z-40 bg-slate-950/80 backdrop-blur-sm select-none">
+            <div className="absolute top-0 left-0 w-full flex items-center justify-between px-6 pt-3 pb-2 text-white font-mono text-[11px] font-medium z-40 select-none pointer-events-none drop-shadow-md">
               <span>{currentTime}</span>
               <div className="flex items-center gap-1.5">
                 <Signal className="w-3 h-3 text-white fill-white" />
@@ -88,23 +123,25 @@ export default function DeviceSimulator({
             </div>
 
             {/* Simulated Mobile Browser Search Header */}
-            <div className="px-3 pb-2 border-b border-slate-900 bg-slate-950/80 backdrop-blur-sm z-40 flex items-center gap-2">
-              <div className="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-[10px] text-slate-400 font-mono flex items-center justify-between overflow-hidden">
-                <span className="flex items-center gap-1 truncate max-w-[180px]">
-                  <Lock className="w-2.5 h-2.5 text-emerald-400 flex-shrink-0" />
-                  <span className="truncate">{currentUrl.replace("https://", "")}</span>
-                </span>
-                <button onClick={handleCopyUrl} className="hover:text-white transition-colors">
-                  {copied ? <Check className="w-2.5 h-2.5 text-emerald-400" /> : <Copy className="w-2.5 h-2.5" />}
+            {!isMobileAppCategory && (
+              <div className="px-3 pt-10 pb-2 border-b border-slate-900 bg-slate-950/80 backdrop-blur-sm z-40 flex items-center gap-2">
+                <div className="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-[10px] text-slate-400 font-mono flex items-center justify-between overflow-hidden">
+                  <span className="flex items-center gap-1 truncate max-w-[180px]">
+                    <Lock className="w-2.5 h-2.5 text-emerald-400 flex-shrink-0" />
+                    <span className="truncate">{currentUrl.replace("https://", "")}</span>
+                  </span>
+                  <button onClick={handleCopyUrl} className="hover:text-white transition-colors">
+                    {copied ? <Check className="w-2.5 h-2.5 text-emerald-400" /> : <Copy className="w-2.5 h-2.5" />}
+                  </button>
+                </div>
+                <button 
+                  onClick={handleReload}
+                  className="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition-colors flex-shrink-0"
+                >
+                  <RotateCw className={`w-3 h-3 ${isLoading ? "animate-spin" : ""}`} />
                 </button>
               </div>
-              <button 
-                onClick={handleReload}
-                className="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition-colors flex-shrink-0"
-              >
-                <RotateCw className={`w-3 h-3 ${isLoading ? "animate-spin" : ""}`} />
-              </button>
-            </div>
+            )}
 
             {/* App View / Iframe Content Container */}
             <div className="flex-1 relative w-full h-full overflow-hidden bg-slate-900">
