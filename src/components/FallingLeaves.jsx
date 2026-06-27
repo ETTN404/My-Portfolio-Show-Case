@@ -46,8 +46,8 @@ const FallingLeaves = () => {
             left: leaf.x,
             top: leaf.y,
             transform: `rotate(${leaf.rotation}deg) scale(${leaf.scale})`,
-            fill: '#83B896', // flora.accent
-            opacity: 0.6,
+            fill: '#A8BCC8', // Dusty blue — matches claymorphic accent
+            opacity: 0.4,
           }}
           width="24"
           height="32"

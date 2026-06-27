@@ -1,51 +1,115 @@
-import React from "react";
-import { ChevronRight } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { ChevronRight, Github, Linkedin, Mail, MapPin, Download } from "lucide-react";
+import MagneticButton from "./MagneticButton";
 
-export default function Hero({ projectsCount }) {
-  return (
-    <section className="relative pt-32 pb-24 px-4 sm:px-6 lg:px-8 border-b border-spine-border/50 overflow-hidden text-center z-10 flex flex-col items-center">
-      {/* Background Grids & Pulses handled in index.css body wrapper */}
+export default function Hero() {
+  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
+  const headingRef = useRef(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!headingRef.current) return;
+      const rect = headingRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
       
-      {/* Top Badge */}
-      <div className="inline-flex items-center gap-2 p-1 pr-3 rounded-full bg-spine-panel border border-spine-border mb-8 cursor-pointer hover:border-spine-accent/30 transition-colors animate-fade-in-up">
-        <span className="bg-spine-accent/10 text-spine-accent text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
-          New
-        </span>
-        <span className="text-xs text-spine-textMuted flex items-center gap-1 font-medium">
-          Introducing Interactive Demos <ChevronRight className="w-3 h-3" />
-        </span>
-      </div>
+      // Calculate offset based on distance from text center (inverted for natural shadow follow)
+      const x = ((e.clientX - centerX) / window.innerWidth) * -30;
+      const y = ((e.clientY - centerY) / window.innerHeight) * -30;
+      setMouseOffset({ x, y });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
-      {/* Hero Header */}
-      <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-[1.1] animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-        Revolutionize Your Workflow with <span className="text-spine-accent">AI</span> Power
-      </h1>
+  return (
+    <section id="home" className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden z-10">
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
-      <p className="mt-6 text-spine-textMuted text-lg sm:text-xl max-w-2xl font-normal leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-        Harness the future of interactive development to boost productivity, creativity, and decision-making. Test drive {projectsCount} production-ready apps below.
-      </p>
+        {/* Left — Text Content */}
+        <div className="flex-1 text-center lg:text-left animate-fade-in-up">
+          {/* Status Badge */}
+          <div className="inline-flex items-center gap-2 p-1.5 pr-4 rounded-full clay-raised-sm mb-6 cursor-default">
+            <span className="relative flex h-2.5 w-2.5 ml-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+            </span>
+            <span className="text-xs text-clay-textMuted font-medium">
+              Available for freelance work
+            </span>
+          </div>
 
-      {/* Hero Actions */}
-      <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-        <button className="w-full sm:w-auto px-8 py-3.5 rounded-full btn-spine flex items-center justify-center gap-2 text-sm tracking-wide">
-          Get Started Free <ChevronRight className="w-4 h-4" />
-        </button>
-        <button className="w-full sm:w-auto px-8 py-3.5 rounded-full btn-spine-dark flex items-center justify-center text-sm tracking-wide">
-          See It In Action
-        </button>
-      </div>
+          <h1 
+            ref={headingRef}
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-clay-text leading-[1.1] text-depth"
+            style={{ "--mx": mouseOffset.x, "--my": mouseOffset.y }}
+          >
+            Hi, I'm <span className="text-clay-accent text-depth-accent">Ethan</span>
+            <br />
+            <span className="text-clay-textMuted font-bold text-depth">Full-Stack Developer</span>
+          </h1>
 
-      {/* Social Proof / Brands */}
-      <div className="mt-24 pt-10 border-t border-spine-border/30 w-full max-w-5xl animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-        <p className="text-xs text-spine-textMuted font-medium mb-8">
-          Trust by 99,000+ world-class brands and organizations
-        </p>
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-          <span className="font-bold text-xl tracking-tight text-white flex items-center gap-1.5"><span className="text-2xl">▲</span>Vercel</span>
-          <span className="font-bold text-xl tracking-tight text-white">Figma</span>
-          <span className="font-bold text-xl tracking-tight text-white flex items-center gap-1">⎔ Webflow</span>
-          <span className="font-bold text-xl tracking-tight text-white flex items-center gap-1">■ Square</span>
-          <span className="font-bold text-xl tracking-tight text-white">Airbnb</span>
+          <p className="mt-5 text-clay-textMuted text-base sm:text-lg max-w-lg font-normal leading-relaxed mx-auto lg:mx-0">
+            I craft high-performance web & mobile applications using React, Flutter, and Node.js.
+            Passionate about clean architecture, beautiful interfaces, and solving real-world problems.
+          </p>
+
+          {/* Location */}
+          <div className="flex items-center gap-1.5 mt-4 justify-center lg:justify-start">
+            <MapPin className="w-4 h-4 text-clay-accent" />
+            <span className="text-sm text-clay-textMuted font-medium">Addis Ababa, Ethiopia</span>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 justify-center lg:justify-start">
+            <MagneticButton href="#projects" className="w-full sm:w-auto px-7 py-3 rounded-full btn-clay-accent flex items-center justify-center gap-2 text-sm tracking-wide clickable">
+              View My Work <ChevronRight className="w-4 h-4" />
+            </MagneticButton>
+            <MagneticButton href="#contact" className="w-full sm:w-auto px-7 py-3 rounded-full btn-clay flex items-center justify-center text-sm tracking-wide text-clay-textMuted font-semibold clickable">
+              <Mail className="w-4 h-4 mr-2" /> Get In Touch
+            </MagneticButton>
+          </div>
+
+          {/* Social Icons Row */}
+          <div className="flex items-center gap-3 mt-8 justify-center lg:justify-start">
+            <MagneticButton href="https://github.com" className="w-10 h-10 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors clickable">
+              <Github className="w-5 h-5 pointer-events-none" />
+            </MagneticButton>
+            <MagneticButton href="https://linkedin.com" className="w-10 h-10 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors clickable">
+              <Linkedin className="w-5 h-5 pointer-events-none" />
+            </MagneticButton>
+            <MagneticButton href="mailto:hello@example.com" className="w-10 h-10 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors clickable">
+              <Mail className="w-5 h-5 pointer-events-none" />
+            </MagneticButton>
+          </div>
+        </div>
+
+        {/* Right — Avatar Card */}
+        <div className="flex-shrink-0 animate-fade-in-up card-float-1" style={{ animationDelay: '0.2s' }}>
+          <div className="clay-card p-3 rounded-[32px] w-[280px] sm:w-[320px]">
+            <img
+              src="/avatar.png"
+              alt="Ethan — Full-Stack Developer"
+              className="w-full aspect-square object-cover rounded-[24px] bg-gradient-to-b from-clay-accentSoft/30 to-clay-surface"
+            />
+            {/* Mini stat bar */}
+            <div className="flex items-center justify-around mt-3 clay-inset rounded-clay-pill py-2.5 px-4">
+              <div className="text-center">
+                <p className="text-lg font-extrabold text-clay-text leading-none">3+</p>
+                <p className="text-[10px] text-clay-textLight font-medium mt-0.5">Years Exp</p>
+              </div>
+              <div className="w-px h-6 bg-clay-border" />
+              <div className="text-center">
+                <p className="text-lg font-extrabold text-clay-text leading-none">20+</p>
+                <p className="text-[10px] text-clay-textLight font-medium mt-0.5">Projects</p>
+              </div>
+              <div className="w-px h-6 bg-clay-border" />
+              <div className="text-center">
+                <p className="text-lg font-extrabold text-clay-text leading-none">10+</p>
+                <p className="text-[10px] text-clay-textLight font-medium mt-0.5">Clients</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

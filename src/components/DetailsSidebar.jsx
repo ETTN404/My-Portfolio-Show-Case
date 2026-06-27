@@ -19,35 +19,35 @@ export default function DetailsSidebar({ project, currentUrl }) {
   const getArchitectureTree = () => {
     if (project.type === "mobile") {
       return (
-        <div className="font-mono text-xs text-slate-400 space-y-1 bg-slate-950 p-3 rounded-lg border border-slate-900 select-text">
-          <p className="text-emerald-400">📦 lib/</p>
-          <p className="pl-4 text-emerald-500/80">📂 models/</p>
-          <p className="pl-8 text-slate-500">📄 project_model.dart</p>
-          <p className="pl-4 text-cyan-400">📂 providers / state/</p>
-          <p className="pl-8 text-slate-500">📄 global_controller.dart</p>
-          <p className="pl-4 text-violet-400">📂 views / screens/</p>
-          <p className="pl-8 text-slate-500">📄 dashboard_screen.dart</p>
-          <p className="pl-8 text-slate-500">📄 details_drawer.dart</p>
-          <p className="pl-4 text-yellow-500/80">📂 services/</p>
-          <p className="pl-8 text-slate-500">📄 firebase_auth.dart</p>
-          <p className="pl-8 text-slate-500">📄 local_cache_hive.dart</p>
-          <p className="text-slate-400">📄 main.dart</p>
+        <div className="font-mono text-xs text-clay-textMuted space-y-1 clay-inset p-3 rounded-clay-sm select-text">
+          <p className="text-emerald-600">📦 lib/</p>
+          <p className="pl-4 text-emerald-500">📂 models/</p>
+          <p className="pl-8 text-clay-textLight">📄 project_model.dart</p>
+          <p className="pl-4 text-clay-accent">📂 providers / state/</p>
+          <p className="pl-8 text-clay-textLight">📄 global_controller.dart</p>
+          <p className="pl-4 text-violet-500">📂 views / screens/</p>
+          <p className="pl-8 text-clay-textLight">📄 dashboard_screen.dart</p>
+          <p className="pl-8 text-clay-textLight">📄 details_drawer.dart</p>
+          <p className="pl-4 text-amber-600">📂 services/</p>
+          <p className="pl-8 text-clay-textLight">📄 firebase_auth.dart</p>
+          <p className="pl-8 text-clay-textLight">📄 local_cache_hive.dart</p>
+          <p className="text-clay-textMuted">📄 main.dart</p>
         </div>
       );
     } else {
       return (
-        <div className="font-mono text-xs text-slate-400 space-y-1 bg-slate-950 p-3 rounded-lg border border-slate-900 select-text">
-          <p className="text-cyan-400">📦 src/</p>
-          <p className="pl-4 text-emerald-400">📂 components/</p>
-          <p className="pl-8 text-slate-500">📄 InteractiveCanvas.jsx</p>
-          <p className="pl-8 text-slate-500">📄 SidebarControl.jsx</p>
-          <p className="pl-4 text-cyan-400">📂 hooks / store/</p>
-          <p className="pl-8 text-slate-500">📄 useTokenStore.js</p>
-          <p className="pl-4 text-violet-400">📂 assets / styles/</p>
-          <p className="pl-8 text-slate-500">📄 index.css</p>
-          <p className="pl-4 text-slate-500">📄 App.jsx</p>
-          <p className="text-slate-400">📄 main.jsx</p>
-          <p className="text-slate-500">📄 tailwind.config.js</p>
+        <div className="font-mono text-xs text-clay-textMuted space-y-1 clay-inset p-3 rounded-clay-sm select-text">
+          <p className="text-clay-accent">📦 src/</p>
+          <p className="pl-4 text-emerald-600">📂 components/</p>
+          <p className="pl-8 text-clay-textLight">📄 InteractiveCanvas.jsx</p>
+          <p className="pl-8 text-clay-textLight">📄 SidebarControl.jsx</p>
+          <p className="pl-4 text-clay-accent">📂 hooks / store/</p>
+          <p className="pl-8 text-clay-textLight">📄 useTokenStore.js</p>
+          <p className="pl-4 text-violet-500">📂 assets / styles/</p>
+          <p className="pl-8 text-clay-textLight">📄 index.css</p>
+          <p className="pl-4 text-clay-textLight">📄 App.jsx</p>
+          <p className="text-clay-textMuted">📄 main.jsx</p>
+          <p className="text-clay-textLight">📄 tailwind.config.js</p>
         </div>
       );
     }
@@ -86,52 +86,52 @@ export default function DetailsSidebar({ project, currentUrl }) {
   };
 
   return (
-    <div className="glass-panel border border-slate-800/80 rounded-2xl p-5 flex flex-col h-full bg-[#0b0f19]/90 backdrop-blur-md select-none">
+    <div className="clay-card p-5 flex flex-col h-full select-none">
       
       {/* Category header */}
       <div className="flex items-center gap-2 mb-2">
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-        <span className="text-[10px] font-mono tracking-widest text-emerald-400 uppercase font-bold">
+        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-gentle-pulse" />
+        <span className="text-[10px] font-mono tracking-widest text-clay-accent uppercase font-bold">
           Workspace Directory
         </span>
       </div>
 
       {/* Title & Tagline */}
-      <h2 className="text-2xl font-extrabold text-white leading-tight">
+      <h2 className="text-2xl font-extrabold text-clay-text leading-tight">
         {project.title}
       </h2>
-      <p className="text-slate-400 text-xs mt-1.5 italic font-light leading-snug">
+      <p className="text-clay-textMuted text-xs mt-1.5 italic font-light leading-snug">
         "{project.tagline}"
       </p>
 
       {/* Tabs */}
-      <div className="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-900 mt-4">
+      <div className="flex items-center gap-1 clay-inset p-1.5 rounded-clay-sm mt-4">
         <button
           onClick={() => setActiveTab("overview")}
-          className={`flex-1 flex items-center justify-center gap-1 text-[11px] font-mono py-2 rounded-lg transition-all ${
+          className={`flex-1 flex items-center justify-center gap-1 text-[11px] font-mono py-2 rounded-[10px] transition-all ${
             activeTab === "overview" 
-              ? "bg-[#10b981]/15 border border-emerald-500/20 text-emerald-400" 
-              : "text-slate-500 hover:text-slate-300"
+              ? "btn-clay-accent shadow-none text-white" 
+              : "text-clay-textMuted hover:text-clay-text"
           }`}
         >
           <BookOpen className="w-3.5 h-3.5" /> Overview
         </button>
         <button
           onClick={() => setActiveTab("architecture")}
-          className={`flex-1 flex items-center justify-center gap-1 text-[11px] font-mono py-2 rounded-lg transition-all ${
+          className={`flex-1 flex items-center justify-center gap-1 text-[11px] font-mono py-2 rounded-[10px] transition-all ${
             activeTab === "architecture" 
-              ? "bg-[#06b6d4]/15 border border-cyan-500/20 text-cyan-400" 
-              : "text-slate-500 hover:text-slate-300"
+              ? "btn-clay-accent shadow-none text-white" 
+              : "text-clay-textMuted hover:text-clay-text"
           }`}
         >
           <FolderTree className="w-3.5 h-3.5" /> Structure
         </button>
         <button
           onClick={() => setActiveTab("devnotes")}
-          className={`flex-1 flex items-center justify-center gap-1 text-[11px] font-mono py-2 rounded-lg transition-all ${
+          className={`flex-1 flex items-center justify-center gap-1 text-[11px] font-mono py-2 rounded-[10px] transition-all ${
             activeTab === "devnotes" 
-              ? "bg-[#8b5cf6]/15 border border-violet-500/20 text-violet-400" 
-              : "text-slate-500 hover:text-slate-300"
+              ? "btn-clay-accent shadow-none text-white" 
+              : "text-clay-textMuted hover:text-clay-text"
           }`}
         >
           <Cpu className="w-3.5 h-3.5" /> Dev Notes
@@ -144,20 +144,20 @@ export default function DetailsSidebar({ project, currentUrl }) {
           <>
             {/* Description */}
             <div className="space-y-2">
-              <h4 className="text-xs font-mono text-slate-500 uppercase font-semibold">Project Description</h4>
-              <p className="text-slate-300 text-sm leading-relaxed font-light">
+              <h4 className="text-xs font-mono text-clay-textLight uppercase font-semibold">Project Description</h4>
+              <p className="text-clay-text text-sm leading-relaxed font-light">
                 {project.description}
               </p>
             </div>
 
             {/* Tech Stack used */}
             <div className="space-y-2.5">
-              <h4 className="text-xs font-mono text-slate-500 uppercase font-semibold">Tech Stack Used</h4>
+              <h4 className="text-xs font-mono text-clay-textLight uppercase font-semibold">Tech Stack Used</h4>
               <div className="flex flex-wrap gap-1.5">
                 {project.stack.map((tech, idx) => (
                   <span 
                     key={idx} 
-                    className="text-xs font-mono bg-slate-950 border border-slate-900 text-slate-300 px-2.5 py-1 rounded-lg"
+                    className="clay-pill text-[11px] py-1 px-2.5"
                   >
                     {tech}
                   </span>
@@ -170,13 +170,13 @@ export default function DetailsSidebar({ project, currentUrl }) {
         {activeTab === "architecture" && (
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h4 className="text-xs font-mono text-slate-500 uppercase font-semibold flex items-center gap-1">
-                <FolderTree className="w-3.5 h-3.5 text-cyan-400" /> Folder Hierarchy
+              <h4 className="text-xs font-mono text-clay-textLight uppercase font-semibold flex items-center gap-1">
+                <FolderTree className="w-3.5 h-3.5 text-clay-accent" /> Folder Hierarchy
               </h4>
-              <span className="text-[10px] font-mono text-slate-600 bg-slate-950 px-1.5 py-0.5 rounded">Modular SPA</span>
+              <span className="text-[10px] font-mono text-clay-textLight clay-inset px-2 py-0.5 rounded-clay-sm">Modular SPA</span>
             </div>
             {getArchitectureTree()}
-            <p className="text-[11px] text-slate-500 font-mono italic leading-normal">
+            <p className="text-[11px] text-clay-textLight font-mono italic leading-normal">
               Folder structures replicate industry production standards, leveraging absolute path bindings.
             </p>
           </div>
@@ -184,20 +184,20 @@ export default function DetailsSidebar({ project, currentUrl }) {
 
         {activeTab === "devnotes" && (
           <div className="space-y-4">
-            <h4 className="text-xs font-mono text-slate-500 uppercase font-semibold flex items-center gap-1.5">
-              <Terminal className="w-3.5 h-3.5 text-violet-400" /> Engineering Ledger
+            <h4 className="text-xs font-mono text-clay-textLight uppercase font-semibold flex items-center gap-1.5">
+              <Terminal className="w-3.5 h-3.5 text-clay-accent" /> Engineering Ledger
             </h4>
             
-            <div className="rounded-xl border border-violet-500/10 bg-violet-500/5 p-4 space-y-3">
+            <div className="clay-inset rounded-clay-sm p-4 space-y-3">
               <div>
-                <p className="text-xs font-mono font-bold text-violet-400 uppercase tracking-wider">The Challenge</p>
-                <p className="text-sm text-slate-300 font-light mt-1 leading-normal">
+                <p className="text-xs font-mono font-bold text-clay-accent uppercase tracking-wider">The Challenge</p>
+                <p className="text-sm text-clay-text font-light mt-1 leading-normal">
                   {projectNotes.challenge}
                 </p>
               </div>
-              <div className="pt-2 border-t border-violet-500/10">
-                <p className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">The Engineering Solution</p>
-                <p className="text-sm text-slate-300 font-light mt-1 leading-normal">
+              <div className="pt-2 border-t border-clay-border">
+                <p className="text-xs font-mono font-bold text-emerald-600 uppercase tracking-wider">The Engineering Solution</p>
+                <p className="text-sm text-clay-text font-light mt-1 leading-normal">
                   {projectNotes.solution}
                 </p>
               </div>
@@ -207,15 +207,15 @@ export default function DetailsSidebar({ project, currentUrl }) {
       </div>
 
       {/* Sidebar Footer with Action Links */}
-      <div className="mt-6 pt-4 border-t border-slate-900 space-y-3">
+      <div className="mt-6 pt-4 border-t border-clay-border space-y-3">
         {/* GitHub Link Button */}
         <a 
           href={project.githubUrl} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-slate-300 bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 font-mono text-xs font-semibold transition-all duration-200 shadow-md"
+          className="flex items-center justify-center gap-2 w-full py-2.5 rounded-clay-sm btn-clay text-clay-textMuted font-mono text-xs font-semibold transition-all duration-200"
         >
-          <Github className="w-4 h-4 text-slate-400" />
+          <Github className="w-4 h-4" />
           Inspect GitHub Repository
         </a>
 
@@ -224,7 +224,7 @@ export default function DetailsSidebar({ project, currentUrl }) {
           href={currentUrl} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-slate-950 bg-gradient-to-r from-emerald-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 font-mono text-xs font-bold transition-all duration-200 shadow-lg"
+          className="flex items-center justify-center gap-2 w-full py-2.5 rounded-clay-sm btn-clay-accent font-mono text-xs font-bold transition-all duration-200"
         >
           <ExternalLink className="w-4 h-4" />
           Launch Live App ↗

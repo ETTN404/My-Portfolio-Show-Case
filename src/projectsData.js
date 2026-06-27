@@ -1,5 +1,17 @@
 export const projects = [
   {
+    id: "amen-bakery",
+    title: "Amen Bakery",
+    type: "mobile",
+    category: "Mobile App",
+    tagline: "Modern bakery storefront and delivery app",
+    description: "A complete mobile application for a modern bakery. Features an intuitive storefront for browsing pastries, secure checkout, user authentication, and real-time delivery tracking. Built with focus on a delicious UI and seamless user experience.",
+    stack: ["Flutter", "Dart", "Firebase Auth", "Cloud Firestore", "Stripe API"],
+    mockUrl: "https://amenbakery.vercel.app",
+    githubUrl: "https://github.com",
+    accentColor: "emerald"
+  },
+  {
     id: "taskflow-flutter",
     title: "TaskFlow Pro",
     type: "mobile",
