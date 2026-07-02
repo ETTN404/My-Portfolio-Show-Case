@@ -151,7 +151,7 @@ export default function App() {
                       <span className="text-white font-extrabold text-lg leading-none">E</span>
                     </div>
                     <span className="font-sans text-lg font-bold text-clay-text tracking-tight select-none">
-                      Ethan<span className="text-clay-accent">.</span>dev
+                      Eyob<span className="text-clay-accent">.dev</span>
                     </span>
                   </div>
 
@@ -237,18 +237,13 @@ export default function App() {
                     <h3 className="text-xl font-bold text-clay-text mb-4">Who I Am</h3>
                     <div className="space-y-4 text-clay-textMuted text-sm leading-relaxed">
                       <p>
-                        I'm a passionate full-stack developer based in Addis Ababa, Ethiopia, with over 3 years 
-                        of experience building web and mobile applications. I specialize in creating 
-                        pixel-perfect, high-performance interfaces that users love.
+                        I'm a computer scientist and full-stack developer based in Addis Ababa, Ethiopia, focused on building straightforward web and mobile applications using React and Flutter.
                       </p>
                       <p>
-                        My journey started with a curiosity for how things work on the web, and has evolved into 
-                        a deep expertise in modern JavaScript frameworks, cross-platform mobile development with 
-                        Flutter, and backend architecture with Node.js and cloud services.
+                        Passionate about solving practical problems, working with data, and collaborating with teams to build useful projects. My journey has evolved into deep expertise in modern JavaScript frameworks, cross-platform mobile development, and backend architecture.
                       </p>
                       <p>
-                        When I'm not coding, you'll find me exploring new design trends, contributing to 
-                        open-source projects, or mentoring junior developers in local tech communities.
+                        When I'm not coding, you'll find me exploring new design trends, contributing to open-source projects, or continuously learning new technologies.
                       </p>
                     </div>
                   </div>
@@ -429,8 +424,8 @@ export default function App() {
                   {/* Contact Info Cards */}
                   <div className="lg:col-span-2 space-y-4">
                     {[
-                      { icon: <Mail className="w-5 h-5" />, label: "Email", value: "hello@ethan.dev", href: "mailto:hello@ethan.dev" },
-                      { icon: <Phone className="w-5 h-5" />, label: "Phone", value: "+251 912 345 678", href: "tel:+251912345678" },
+                      { icon: <Mail className="w-5 h-5" />, label: "Email", value: "eyobtaye1210@gmail.com", href: "mailto:eyobtaye1210@gmail.com" },
+                      { icon: <Phone className="w-5 h-5" />, label: "Phone", value: "0972334145", href: "tel:0972334145" },
                       { icon: <MapPin className="w-5 h-5" />, label: "Location", value: "Addis Ababa, Ethiopia", href: null },
                     ].map((item) => (
                       <div key={item.label} className="clay-card p-5 rounded-clay flex items-center gap-4 group hover:shadow-clay-raised-lg transition-all duration-300">
@@ -452,13 +447,13 @@ export default function App() {
                     <div className="clay-card p-5 rounded-clay">
                       <p className="text-xs text-clay-textLight font-medium uppercase tracking-wider mb-3">Find me on</p>
                       <div className="flex items-center gap-3">
-                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors">
+                        <a href="https://github.com/ETTN404" target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors">
                           <Github className="w-5 h-5" />
                         </a>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors">
+                        <a href="http://www.linkedin.com/in/eyob-taye-69219230b" target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors">
                           <Linkedin className="w-5 h-5" />
                         </a>
-                        <a href="mailto:hello@ethan.dev" className="w-11 h-11 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors">
+                        <a href="mailto:eyobtaye1210@gmail.com" className="w-11 h-11 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors">
                           <Mail className="w-5 h-5" />
                         </a>
                       </div>
@@ -513,19 +508,19 @@ export default function App() {
                     <span className="text-white font-extrabold text-lg leading-none">E</span>
                   </div>
                   <div>
-                    <p className="font-bold text-clay-text text-sm">Ethan.dev</p>
+                    <p className="font-bold text-clay-text text-sm">Eyob.dev</p>
                     <p className="text-clay-textLight text-xs">Full-Stack Developer Portfolio</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors">
+                  <a href="https://github.com/ETTN404" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors">
                     <Github className="w-4 h-4" />
                   </a>
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors">
+                  <a href="http://www.linkedin.com/in/eyob-taye-69219230b" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors">
                     <Linkedin className="w-4 h-4" />
                   </a>
-                  <a href="mailto:hello@ethan.dev" className="w-9 h-9 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors">
+                  <a href="mailto:eyobtaye1210@gmail.com" className="w-9 h-9 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors">
                     <Mail className="w-4 h-4" />
                   </a>
                 </div>

@@ -44,14 +44,13 @@ export default function Hero() {
             className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-clay-text leading-[1.1] text-depth"
             style={{ "--mx": mouseOffset.x, "--my": mouseOffset.y }}
           >
-            Hi, I'm <span className="text-clay-accent text-depth-accent">Ethan</span>
+            Hi, I'm <span className="text-clay-accent text-depth-accent">Eyob</span>
             <br />
-            <span className="text-clay-textMuted font-bold text-depth">Full-Stack Developer</span>
+            <span className="text-clay-textMuted font-bold text-depth">Computer Scientist & Full-Stack Developer</span>
           </h1>
 
           <p className="mt-5 text-clay-textMuted text-base sm:text-lg max-w-lg font-normal leading-relaxed mx-auto lg:mx-0">
-            I craft high-performance web & mobile applications using React, Flutter, and Node.js.
-            Passionate about clean architecture, beautiful interfaces, and solving real-world problems.
+            A computer scientist and full-stack developer focused on building straightforward web and mobile applications using React and Flutter. Passionate about solving practical problems, working with data, and collaborating with teams to build useful projects.
           </p>
 
           {/* Location */}
@@ -72,27 +71,26 @@ export default function Hero() {
 
           {/* Social Icons Row */}
           <div className="flex items-center gap-3 mt-8 justify-center lg:justify-start">
-            <MagneticButton href="https://github.com" className="w-10 h-10 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors clickable">
+            <MagneticButton href="https://github.com/ETTN404" className="w-10 h-10 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors clickable">
               <Github className="w-5 h-5 pointer-events-none" />
             </MagneticButton>
-            <MagneticButton href="https://linkedin.com" className="w-10 h-10 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors clickable">
+            <MagneticButton href="http://www.linkedin.com/in/eyob-taye-69219230b" className="w-10 h-10 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors clickable">
               <Linkedin className="w-5 h-5 pointer-events-none" />
             </MagneticButton>
-            <MagneticButton href="mailto:hello@example.com" className="w-10 h-10 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors clickable">
+            <MagneticButton href="mailto:eyobtaye1210@gmail.com" className="w-10 h-10 rounded-full btn-clay flex items-center justify-center text-clay-textMuted hover:text-clay-accent transition-colors clickable">
               <Mail className="w-5 h-5 pointer-events-none" />
             </MagneticButton>
           </div>
         </div>
 
         {/* Right — Avatar Card */}
-        <div className="flex-shrink-0 animate-fade-in-up card-float-1" style={{ animationDelay: '0.2s' }}>
+        {/* <div className="flex-shrink-0 animate-fade-in-up card-float-1" style={{ animationDelay: '0.2s' }}>
           <div className="clay-card p-3 rounded-[32px] w-[280px] sm:w-[320px]">
             <img
               src="/avatar.png"
               alt="Ethan — Full-Stack Developer"
               className="w-full aspect-square object-cover rounded-[24px] bg-gradient-to-b from-clay-accentSoft/30 to-clay-surface"
             />
-            {/* Mini stat bar */}
             <div className="flex items-center justify-around mt-3 clay-inset rounded-clay-pill py-2.5 px-4">
               <div className="text-center">
                 <p className="text-lg font-extrabold text-clay-text leading-none">3+</p>
@@ -110,7 +108,7 @@ export default function Hero() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

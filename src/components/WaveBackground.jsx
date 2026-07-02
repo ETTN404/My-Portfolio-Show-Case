@@ -91,7 +91,8 @@ export default function WaveBackground() {
       className="fixed inset-0 overflow-hidden pointer-events-none z-0 will-change-transform"
       style={{ transform: `translateY(${scrollY * -0.2}px)` }}
     >
-      {boxes.map((box, i) => (
+      {/* Commented out floating boxes to make background flat */}
+      {/* boxes.map((box, i) => (
         <div
           key={i}
           className="floating-box"
@@ -105,7 +106,7 @@ export default function WaveBackground() {
             zIndex: box.z,
           }}
         />
-      ))}
+      )) */}
       {/* Consistent Soft Frosted Glass Overlay */}
       <div 
         className="absolute inset-0 z-10"

@@ -26,7 +26,9 @@ export default function DeviceSimulator({
   const [copied, setCopied] = useState(false);
   const [currentTime, setCurrentTime] = useState("09:41");
   const [scale, setScale] = useState(1);
+  const [laptopScale, setLaptopScale] = useState(1);
   const containerRef = useRef(null);
+  const laptopRef = useRef(null);
 
   // Keep a digital clock updated for the mobile mockup
   useEffect(() => {
@@ -76,8 +78,25 @@ export default function DeviceSimulator({
     return () => observer.disconnect();
   }, [isMobileAppCategory, isMobile]);
 
+  useEffect(() => {
+    if (isMobile || !laptopRef.current) return;
+    
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const { width } = entry.contentRect;
+        // Base desktop resolution we want to simulate: 1280px width
+        // The inner width is the laptop container's width.
+        // We scale the 1280px iframe down to fit this width.
+        setLaptopScale(width / 1280);
+      }
+    });
+
+    observer.observe(laptopRef.current);
+    return () => observer.disconnect();
+  }, [isMobile]);
+
   return (
-    <div className="flex flex-col items-center justify-center p-2 sm:p-4 w-full h-full min-h-[500px] lg:min-h-[660px]">
+    <div className="flex flex-col items-center justify-center p-0 w-full h-full min-h-[500px] lg:min-h-[660px]">
       {isMobile ? (
         /* ================= SMARTPHONE SIMULATOR ================= */
         <div ref={containerRef} className="relative w-full h-full flex items-center justify-center overflow-hidden">
@@ -251,7 +270,7 @@ export default function DeviceSimulator({
             </div>
 
             {/* Laptop Body Browser Content */}
-            <div className="w-full aspect-[16/10] relative bg-white overflow-hidden">
+            <div ref={laptopRef} className="w-full aspect-[16/10] relative bg-white overflow-hidden">
               {/* Loader Overlay */}
               {isLoading && (
                 <div className="absolute inset-0 bg-clay-bg/95 flex flex-col items-center justify-center p-8 text-center z-30 transition-all duration-300">
@@ -275,17 +294,29 @@ export default function DeviceSimulator({
                 </div>
               )}
 
-              {/* Real Live IFrame */}
-              <iframe
-                ref={iframeRef}
-                src={currentUrl}
-                title={project.title}
-                className="w-full h-full border-0"
-                onLoad={() => setIsLoading(false)}
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                loading="lazy"
-                style={{ contentVisibility: "auto" }}
-              />
+              {/* Real Live IFrame scaled to simulate desktop */}
+              <div 
+                style={{
+                  width: '1280px',
+                  height: `${1280 * (10 / 16)}px`,
+                  transform: `scale(${laptopScale})`,
+                  transformOrigin: 'top left',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0
+                }}
+              >
+                <iframe
+                  ref={iframeRef}
+                  src={currentUrl}
+                  title={project.title}
+                  className="w-full h-full border-0"
+                  onLoad={() => setIsLoading(false)}
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                  loading="lazy"
+                  style={{ contentVisibility: "auto" }}
+                />
+              </div>
             </div>
           </div>
 

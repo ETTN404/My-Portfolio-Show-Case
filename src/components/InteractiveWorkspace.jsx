@@ -100,7 +100,7 @@ export default function InteractiveWorkspace({ project, onClose }) {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch relative z-10">
         
         {/* Left Interactive Device Panel */}
-        <div className="lg:col-span-7 xl:col-span-8 clay-card flex items-center justify-center relative min-h-[580px] lg:min-h-0 p-4 sm:p-8">
+        <div className="lg:col-span-7 xl:col-span-8 clay-card flex items-center justify-center relative min-h-[580px] lg:min-h-0 p-1 sm:p-2">
           <div className="w-full h-full flex items-center justify-center">
             <DeviceSimulator 
               project={project}
